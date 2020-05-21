@@ -13,9 +13,16 @@ public class HomeWork3 {
         random = new Random();
 
         // Задание 1.
-        //   gameGuessNumber();
+          gameGuessNumber();
 
-        // Задание 2.
+        // Задание 2. В данном задании если слово больше 5 возникает ошибка:
+
+      //   Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: 6
+	//at java.lang.String.charAt(String.java:658)
+	//at java_3_hw3.HomeWork3.gameGuessWord(HomeWork3.java:71)
+	//at java_3_hw3.HomeWork3.main(HomeWork3.java:19)
+       // К сожалению не понял почему
+
         gameGuessWord();
     }
 
@@ -53,94 +60,30 @@ public class HomeWork3 {
     }
 
     public static void gameGuessWord() {
-        //String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
-        //25 слов 24
-        String[] words = {"apple", "appre", "appl"};
-        int randomWord = random.nextInt(2);
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        char[] arr = {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
+        int randomWord = random.nextInt(words.length);
         String answer = words[randomWord];
-        String userAnswer;
-        System.out.println("Я загадал слово на английском, попробуйте его угадать:");
-        userAnswer = sc.nextLine();
-        userAnswer = userAnswer.toLowerCase();
-        String str1 = userAnswer;
-        String str2 = answer;
-        if (userAnswer.equals(answer)) {
-            System.out.println("Вы угадали");
-        } else {
-            printWord(userAnswer, answer);
+        String userAnswer = "";
+        System.out.println("Я загадал слово.");
 
-        }
+        while (!answer.equals(userAnswer)) {
+            System.out.println("Введите слово:");
+            userAnswer = sc.nextLine();
+            userAnswer = userAnswer.toLowerCase();
 
-
-    }
-
-    public static void printWord(String userAnswer, String answer) {
-        char a;
-        char b;
-        char c;
-        char d;
-        char e;
-        char f;
-        char g;
-        char h;
-        for (int i = 0; i < answer.length(); i++) {
-
-            if (userAnswer.charAt(0) != answer.charAt(0)) {
-                System.out.println("Попробуйте снова");
-            } else if (userAnswer.charAt(i) == answer.charAt(i)) {
-
-
-                //  System.out.println(answer.charAt(i));
-            } else if (answer.length() < userAnswer.length() || answer.length() > userAnswer.length()) {
-                break;
+            for (int i = 0; i < userAnswer.length(); i++) {
+                if (answer.charAt(i) == userAnswer.charAt(i)) {
+                    arr[i] = userAnswer.charAt(i);
+                }
             }
 
+            for (int i = 0; i < arr.length; i++) {
+                System.out.printf("%s", arr[i]);
+            }
+            System.out.println();
         }
-
+        System.out.println("Вы угадали");
     }
+
 }
-//String str = userAnswer.charAt(0);
-         /*(int i = 0; i < 15; i++) {
-            if(answer.charAt(0) != userAnswer.charAt(0)){
-                System.out.println("Попробуйте снова");
-            }else if (answer.charAt(i) == userAnswer.charAt(i)){
-                //answer.charAt(0) = userAnswer.charAt(1);
-            }
-
-        }
-        System.out.println(userAnswer.charAt(0) + userAnswer.charAt(1) + userAnswer.charAt(2) );
-        userAnswer = sc.nextLine();
-        //System.out.println(word);*/
-//userAnswer.toLowerCase();
-
-//String[15] word = new String[]{};
-
-
-
-
-
-       /*do{
-
-
-            if (userAnswer.equals(answer)){
-                System.out.println("Отлично, вы угадали!");
-            } else if(answer.charAt(0) == userAnswer.charAt(0)) {
-                System.out.printf("%-15s", answer.charAt(0));
-            } else if(answer.charAt(0) != userAnswer.charAt(0)){
-                //System.out.println("Вы не угадали ни одной буквы");
-         //  }
-
-          //  System.out.println(answer.charAt(0));
-
-        }while (!userAnswer.equals(answer));*/
-        /*do{
-            userAnswer = sc.toString();
-            userAnswer.toLowerCase();
-            if(userAnswer.equals(answer)){
-                System.out.println("Отлично, вы угадали");
-            }else {
-            String str = new String(answer);
-
-
-            }
-        } while (!userAnswer.equals(answer));*/
