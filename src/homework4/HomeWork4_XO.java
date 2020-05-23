@@ -19,15 +19,15 @@ public class HomeWork4_XO {
         initMap();
         printMap();
 
-        while (true){
+        while (true) {
             humanTurn();
             printMap();
 
-            if(checkWin(DOT_X)){
+            if (autoCheckWin(DOT_X)) {
                 System.out.println("Ты победил!!!");
                 break;
             }
-            if(isFull()){
+            if (isFull()) {
                 System.out.println("Ничья");
                 break;
             }
@@ -35,11 +35,11 @@ public class HomeWork4_XO {
             aiTurn();
             printMap();
 
-            if (checkWin(DOT_O)){
+            if (autoCheckWin(DOT_O)) {
                 System.out.println("Тебя уделал компьютер");
                 break;
             }
-            if (isFull()){
+            if (isFull()) {
                 System.out.println("Ничья");
                 break;
             }
@@ -92,19 +92,19 @@ public class HomeWork4_XO {
         return map[y][x] == DOT_EMPTY;
     }
 
-    public static void aiTurn(){
-        int x,y;
-        do{
+    public static void aiTurn() {
+        int x, y;
+        do {
             x = random.nextInt(SIZE);
             y = random.nextInt(SIZE);
-        }while (!isCellValid(y, x));
+        } while (!isCellValid(y, x));
         map[y][x] = DOT_O;
     }
 
-    public static boolean isFull(){
-        for (int i = 0; i < SIZE ; i++) {
+    public static boolean isFull() {
+        for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if(map[i][j] == DOT_EMPTY){
+                if (map[i][j] == DOT_EMPTY) {
                     return false;
                 }
             }
@@ -112,35 +112,68 @@ public class HomeWork4_XO {
         return true;
     }
 
-    public static boolean checkWin(char c){
-        if (map[0][0] == c && map[0][1] == c && map[0][2] == c){
+    public static boolean checkWin(char c) {
+        if (map[0][0] == c && map[0][1] == c && map[0][2] == c) {
             return true;
         }
-        if (map[1][0] == c && map[1][1] == c && map[1][2] == c){
+        if (map[1][0] == c && map[1][1] == c && map[1][2] == c) {
             return true;
         }
-        if (map[2][0] == c && map[2][1] == c && map[2][2] == c){
-            return true;
-        }
-
-        if (map[0][0] == c && map[1][0] == c && map[2][0] == c){
-            return true;
-        }
-        if (map[0][1] == c && map[1][1] == c && map[2][1] == c){
-            return true;
-        }
-        if (map[0][2] == c && map[1][2] == c && map[2][2] == c){
+        if (map[2][0] == c && map[2][1] == c && map[2][2] == c) {
             return true;
         }
 
-        if (map[0][0] == c && map[1][1] == c && map[2][2] == c){
+        if (map[0][0] == c && map[1][0] == c && map[2][0] == c) {
+            return true;
+        }
+        if (map[0][1] == c && map[1][1] == c && map[2][1] == c) {
+            return true;
+        }
+        if (map[0][2] == c && map[1][2] == c && map[2][2] == c) {
             return true;
         }
 
-        if (map[0][2] == c && map[1][1] == c && map[2][0] == c){
+        if (map[0][0] == c && map[1][1] == c && map[2][2] == c) {
+            return true;
+        }
+
+        if (map[0][2] == c && map[1][1] == c && map[2][0] == c) {
             return true;
         }
 
         return false;
     }
+
+    public static boolean autoCheckWin(char a) {
+        int n = 0;
+        int i;
+        int j = 0;
+        for (i = 0; i < SIZE; i++) {
+            for (j = 0; j < SIZE-1; j++) {
+                if(map[i][j] == a && map[i][j + 1] == a && map[i][j + 2] == a || map[i][j] == a && map[i + 1][j] == a && map[i +2][j] == a){
+                    return true;
+                }
+
+            }
+
+        }
+
+        return false;
+    }
+
+    // }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
