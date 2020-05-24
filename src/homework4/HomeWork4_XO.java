@@ -32,7 +32,8 @@ public class HomeWork4_XO {
                 break;
             }
 
-            aiTurn();
+            //aiTurn();
+            riseOfTheMachines();
             printMap();
 
             if (autoCheckWin(DOT_O)) {
@@ -144,25 +145,49 @@ public class HomeWork4_XO {
         return false;
     }
 
+    // Задание 2 и 3* Универсальный метод для определения победы. Количество символов подря для победы определяются переменными win и win2,
+    // По умолчанию победа определяется количеством символов в строке или столбце массива, для того что бы метод подходил под задание 3*
+    // достаточно вначеле программы значение SIZE поменять на 5 и в полях данного метода if (win == SIZE) и if (win2 == SIZE) SIZE заменить на 4;
     public static boolean autoCheckWin(char a) {
-        int n = 0;
+        int win;
+        int g;
+        int win2;
         int i;
         int j = 0;
         for (i = 0; i < SIZE; i++) {
-            for (j = 0; j < SIZE-1; j++) {
-                if(map[i][j] == a && map[i][j + 1] == a && map[i][j + 2] == a || map[i][j] == a && map[i + 1][j] == a && map[i +2][j] == a){
-                    return true;
+            win = 0;
+            g = SIZE;
+            win2 = 0;
+            for (j = 0; j < SIZE; j++) {
+                g--;
+                if (map[i][j] == a || map[j][i] == a || map[win][win] == a) {
+                    win++;
+                    if (win == SIZE) {
+                        return true;
+                    }
                 }
-
+                if (map[g][win] == a) {
+                    win2++;
+                    if (win2 == SIZE) {
+                        return true;
+                    }
+                }
             }
-
         }
-
         return false;
     }
 
-    // }
 
+    public static void riseOfTheMachines() {
+        int x, y;
+        do {
+            x = random.nextInt(SIZE);
+            y = random.nextInt(SIZE);
+            map[y][x] = DOT_X;
+        } while (!isCellValid(y, x) && autoCheckWin(DOT_X));
+        map[y][x] = DOT_O;
+
+    }
 }
 
 
