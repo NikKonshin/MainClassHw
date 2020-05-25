@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class HomeWork4_XO {
     public static final int SIZE = 3;
-
+    public static final int LENGTH_WIN_LINE = 3;
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
     public static final char DOT_EMPTY = '.';
@@ -32,8 +32,8 @@ public class HomeWork4_XO {
                 break;
             }
 
-            //aiTurn();
-            riseOfTheMachines();
+            aiTurn();
+            //riseOfTheMachines(); К сожалению ИИ мне не поддался((
             printMap();
 
             if (autoCheckWin(DOT_O)) {
@@ -147,7 +147,8 @@ public class HomeWork4_XO {
 
     // Задание 2 и 3* Универсальный метод для определения победы. Количество символов подря для победы определяются переменными win и win2,
     // По умолчанию победа определяется количеством символов в строке или столбце массива, для того что бы метод подходил под задание 3*
-    // достаточно вначеле программы значение SIZE поменять на 5 и в полях данного метода if (win == SIZE) и if (win2 == SIZE) SIZE заменить на 4;
+    // достаточно вначеле программы значение SIZE поменять на 5 и в полях данного метода if (win == LENGTHWINLINE) и if (win2 == LENGTHWINLINE) LENGTHWINLINE заменить на 4;
+    // но есть у этого метода нюанс, если указывать что  длина меполя больше чем длина победной линии то срабатывает и такой вариант XX.XX, тоже как победа не разобрался как исправить
     public static boolean autoCheckWin(char a) {
         int win;
         int g;
@@ -160,15 +161,15 @@ public class HomeWork4_XO {
             win2 = 0;
             for (j = 0; j < SIZE; j++) {
                 g--;
-                if (map[i][j] == a || map[j][i] == a || map[win][win] == a) {
+                if (map[i][j] == a || map[j][i] == a || map[win][win] == a ) {
                     win++;
-                    if (win == SIZE) {
+                    if (win == LENGTH_WIN_LINE) {
                         return true;
                     }
                 }
-                if (map[g][win] == a) {
+                if (map[g][win] == a ) {
                     win2++;
-                    if (win2 == SIZE) {
+                    if (win2 == LENGTH_WIN_LINE) {
                         return true;
                     }
                 }
@@ -179,15 +180,22 @@ public class HomeWork4_XO {
 
 
     public static void riseOfTheMachines() {
-        int x, y;
-        do {
-            x = random.nextInt(SIZE);
-            y = random.nextInt(SIZE);
-            map[y][x] = DOT_X;
-        } while (!isCellValid(y, x) && autoCheckWin(DOT_X));
-        map[y][x] = DOT_O;
+        int win;
+        int g;
+        int win2;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                map[i][j] = DOT_X;
+                if (autoCheckWin(DOT_X)){
+                    map[i][j] = DOT_O;
+                }
+                }
+            }
+        }
 
-    }
+
+
+
 }
 
 
