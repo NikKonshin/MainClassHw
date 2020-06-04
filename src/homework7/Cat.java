@@ -22,13 +22,6 @@ public class Cat {
 
     }
 
-    public int getHunger() {
-        return hunger;
-    }
-
-    public int getAppetite() {
-        return appetite;
-    }
 
     public String getName() {
         return name;

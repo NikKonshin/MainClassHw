@@ -10,7 +10,7 @@ public class Main {
                 new Cat("Шустрик", 20, 4, 4)
         };
 
-        Plate plate = new Plate(15);
+        Plate plate = new Plate(150);
         for (int i = 0; i <cats.length ; i++) {
             cats[i].eat(plate, cats[i].getName(), cats[i].getSatiety());
             plate.info();
